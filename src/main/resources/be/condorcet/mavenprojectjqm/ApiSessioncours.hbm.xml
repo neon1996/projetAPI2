@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-sept.-2019 18:57:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="be.condorcet.mavenprojectjqm.ApiSessioncours" table="api_sessioncours" schema="public" optimistic-lock="version">
+        <id name="idsesscours" type="int">
+            <column name="idsesscours" />
+            <generator class="sequence">
+            <param name="sequence">sessioncours_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="apiCours" class="be.condorcet.mavenprojectjqm.ApiCours" fetch="select">
+            <column name="idcours" not-null="true" />
+        </many-to-one>
+        <many-to-one name="apiLocal" class="be.condorcet.mavenprojectjqm.ApiLocal" fetch="select">
+            <column name="idlocal" not-null="true" />
+        </many-to-one>
+        <property name="datedebut" type="date">
+            <column name="datedebut" length="13" not-null="true" />
+        </property>
+        <property name="datefin" type="date">
+            <column name="datefin" length="13" not-null="true" />
+        </property>
+        <property name="nbreinscrits" type="short">
+            <column name="nbreinscrits" precision="3" scale="0" not-null="true" />
+        </property>
+        <set name="apiInfoses" table="api_infos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idsesscours" not-null="true" />
+            </key>
+            <one-to-many class="be.condorcet.mavenprojectjqm.ApiInfos" />
+        </set>
+    </class>
+</hibernate-mapping>

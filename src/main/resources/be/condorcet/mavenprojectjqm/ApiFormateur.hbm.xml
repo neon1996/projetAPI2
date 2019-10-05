@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-sept.-2019 18:57:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="be.condorcet.mavenprojectjqm.ApiFormateur" table="api_formateur" schema="public" optimistic-lock="version">
+        <id name="idform" type="int">
+            <column name="idform" />
+            <generator class="sequence">
+            <param name="sequence">formateur_seq</param>
+            </generator>
+        </id>
+        <property name="matricule" type="string">
+            <column name="matricule" length="30" not-null="true" unique="true" />
+        </property>
+        <property name="nom" type="string">
+            <column name="nom" length="30" not-null="true" unique="true" />
+        </property>
+        <property name="prenom" type="string">
+            <column name="prenom" length="30" not-null="true" unique="true" />
+        </property>
+        <property name="numero" type="string">
+            <column name="numero" length="20" not-null="true" />
+        </property>
+        <property name="rue" type="string">
+            <column name="rue" length="50" not-null="true" />
+        </property>
+        <property name="localite" type="string">
+            <column name="localite" length="50" not-null="true" />
+        </property>
+        <property name="cp" type="short">
+            <column name="cp" precision="4" scale="0" not-null="true" />
+        </property>
+        <property name="tel" type="string">
+            <column name="tel" length="20" not-null="true" unique="true" />
+        </property>
+        <set name="apiInfoses" table="api_infos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idform" not-null="true" />
+            </key>
+            <one-to-many class="be.condorcet.mavenprojectjqm.ApiInfos" />
+        </set>
+    </class>
+</hibernate-mapping>
